@@ -1,9 +1,5 @@
 version: '3.2'
 
-networks:
-  elk:
-    driver: bridge
-
 services:
   elasticsearch:
     build:
@@ -71,6 +67,10 @@ services:
       - elk
     depends_on:
       - elasticsearch
+
+networks:
+  elk:
+    driver: bridge
 
 volumes:
   elasticsearch:
