@@ -6,25 +6,25 @@ services:
       context: elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
-  volumes:
-    - type: bind
-      source: ./elasticsearch/config/elasticsearch.yml
-      target: /usr/share/elasticsearch/config/elasticsearch.yml
-      read_only: true
-    - type: volume
-      source: ./elasticsearch/data
-      target: /usr/share/elasticsearch/data
-  ports:
-    - '9200:9200'
-    - '9300:9300'
-  environment:
-    ES_JAVA_OPTS: '-Xmx256m -Xms256m'
-    ELASTIC_PASSWORD: changeme
-    # 使用单节点发现来禁用生产模式并避免引导检查
-    # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
-    discovery.type: single-node
-  networks:
-    - elk
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: ./elasticsearch/data
+        target: /usr/share/elasticsearch/data
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    environment:
+      ES_JAVA_OPTS: '-Xmx256m -Xms256m'
+      ELASTIC_PASSWORD: changeme
+      # 使用单节点发现来禁用生产模式并避免引导检查
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    networks:
+      - elk
 
   logstash:
     build:
